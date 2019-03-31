@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Eco Allies Generator</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <style>
+      section{
+        padding:20px;
+      }
+      h2{
+        margin-bottom: 30px;
+      }
+      .token-details{
+        display:block;
+        margin:15px 0px;
+      }
+      .token-li{
+        margin-bottom: 60px;
+      }
+      .token-li:nth-child(odd){
+        background-color: #dee2e6;
+      }
+    </style>
+  </head>
+  <body>
+    <section id="titleSection">
+        <h1>Eco Allies - SuperRare Art Generator</h1>
+        <p>Every week, one new custom Eco Ally art piece will be generated and posted to SuperRare. In order to verify the weekly creation, a record of the ally will be added to the Ethereum blockchain. Art collectors can verify the scarcity and history of art created here.</p>    
+    </section>
+    <br />
+    <hr />
+    <br />
+    <div><button id="add">add</button></div>
+    <section id="listSection">
+      <h2>Token Creation History</h2>
+      <ul id="tokenList" class="token-list list-group list-group-striped">
+          <!-- Generate token list here -->
+      </ul>
+    </section>
+    <script src="./index.js"></script>
+  </body>
+</html>
