@@ -1,0 +1,20 @@
+{
+  "name": "cronjob",
+  "version": "1.0.0",
+  "description": "Cron Job for EA-SR",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=development node index.js --env development",
+    "start:prod": "NODE_ENV=production node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ethereumjs-tx": "^1.3.7",
+    "ethereumjs-util": "^6.1.0",
+    "seedrandom": "^3.0.1",
+    "truffle-hdwallet-provider": "^1.0.6",
+    "web3": "^1.0.0-beta.51"
+  }
+}

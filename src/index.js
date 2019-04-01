@@ -1,5 +1,5 @@
 import Web3 from "web3";
-import contractJson from "../../build/contracts/AllyCore.json";
+import contractJson from "../build/contracts/AllyCore.json";
 import allyList from './allyList.json';
 import { decodeAlly } from './crackDna';
 const App = {
@@ -115,6 +115,7 @@ window.addEventListener("load", function() {
     App.web3 = new Web3(
       new Web3.providers.HttpProvider("http://127.0.0.1:9545"),
     );
+ 
   }
 
   App.start();
