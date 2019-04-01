@@ -21,9 +21,8 @@
 // const HDWallet = require('truffle-hdwallet-provider');
 // const infuraKey = "fj4jll3k.....";
 //
-
+require('dotenv').config();
 const mnemonic = process.env.MNEMONIC;
-console.log('MN',mnemonic);
 const HDWalletProvider = require('truffle-hdwallet-provider');
 
 module.exports = {
