@@ -27,7 +27,9 @@ const App = {
 
   },
   generateLi : function(dna, date){
+    
     const ally = decodeAlly(dna);
+    console.log('ALLY DNA', dna, ally);
     let skillItems = '';
     
     if(ally.ultimate){
@@ -54,7 +56,7 @@ const App = {
     return liTemplate;
   },
   addAllyToBlockchain : function(){
-    this.contract.methods.addToAllyArray(this.web3.utils.fromAscii("6483902865410298")).send({from: this.account, gasPrice : '4700000'})
+    this.contract.methods.addToAllyArray(this.web3.utils.fromAscii("001151918583458400000000")).send({from: this.account, gasPrice : '4700000'})
     .then((data)=>{
       console.log('array length', data);
 

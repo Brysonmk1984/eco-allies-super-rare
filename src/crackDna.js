@@ -1,11 +1,14 @@
 import allyList from './allyList.json';
-
-// First 3 Digits
-function determineAlly(dna){
+// First 3 Digits - 0,1,2
+function determineSeries(dna){
     const substr = parseInt(dna.substring(0,3));
-
+    return substr;
+}
+// 3,4,5 Digits
+function determineAlly(dna){
+    const substr = parseInt(dna.substring(3,6));
     switch(true){
-        // JavaScript removes first zero, so this is needed for first 100 possibilities
+        // JavaScript removes leading zeroes, in this case, the number will fall between 0 and 99.  eg: '007' ends up being 7 as a number
         case (0 <= substr && substr <= 99):
             return allyList[0];
         case (100 <= substr && substr <= 199):
@@ -29,9 +32,9 @@ function determineAlly(dna){
     }
 }
 
-// 4, 5, 6 Digits
+// 6, 7, 8 Digits
 function determineSkills(dna, character){
-    const skill = parseInt(dna.substring(3,6));
+    const skill = parseInt(dna.substring(6,9));
     
     const a = allyList.find((a)=>{
         return a.character === character;
@@ -39,7 +42,7 @@ function determineSkills(dna, character){
 
     const crackedSkills = [];
     switch(true){
-
+        // JavaScript removes leading zeroes, in this case, the number will fall between 0 and 31.  eg: '077' ends up being 77 as a number
         // ONE Skill
         case (0 <= skill && skill <= 31):
             crackedSkills.push(a[0]);
@@ -149,13 +152,12 @@ function determineSkills(dna, character){
 
 }
 
-// 7, 8 Digits
+// 9,10 Digits
 function determineSign(dna){
-    const substr = parseInt(dna.substring(6,8));
-    //console.log(dna, substr);
+    const substr = parseInt(dna.substring(9,11));
 
     switch(true){
-        // JavaScript removes first zero, so this is needed for first 100 possibilities
+        // JavaScript removes leading zeroes, in this case, the number will fall between 0 and 8. eg: '07' ends up being 7 as a number
         // Aries = 9
         case (0 <= substr && substr <= 8):
             return {value : 'Aries', modifier : 3};
@@ -197,12 +199,12 @@ function determineSign(dna){
 
 }
 
-// 9th Digit
+// 11th Digit
 function determineAlignment(dna){
-    const substr = parseInt(dna.substring(8,9));
-    //console.log(dna, substr);
-
+    const substr = parseInt(dna.substring(11,12));
+    //console.log('Alignment',dna, substr);
     switch(true){
+        
         // Lawful Good
         case (0 === substr):
             return {value : 'Lawful Good', modifier : 10};
@@ -233,17 +235,18 @@ function determineAlignment(dna){
     }
 }
 
-// 10, 11 Digits
+// 12, 13 Digits
 function determineColor(dna){
-    const substr = parseInt(dna.substring(8,10));
-    //console.log('!',dna, substr);
+    const substr = parseInt(dna.substring(12,14));
+    console.log('COLOR',dna, substr);
 
     switch(true){
-        // JavaScript removes first zero, so this is needed for first 100 possibilities
+        
         // Diamond = 1
         case(0 === substr):
             return {value : 'Diamond', modifier : 10};
         // Amethyst 7
+        // JavaScript removes leading zeroes, in this case, the number will fall between 1 and 7. eg: '07' ends up being 7 as a number
         case (1 <= substr && substr <= 7):
             return {value : 'Amethyst', modifier : 5};
         // Citrine = 7
@@ -361,6 +364,7 @@ function determinePower(skillCount, sign, alignment, color, hasUltimate, matchin
 }
 
 function decodeAlly(dna){
+    const series = determineSeries(dna);
     const basics =  determineAlly(dna);
     const color = determineColor(dna);
     const skills = determineSkills(dna, basics.character);
@@ -369,6 +373,7 @@ function decodeAlly(dna){
     const matchingStone = determineStoneSignMatch(color.value, sign.value);
     const hasUltimate = basics.alignment === alignment.value;
     const ally = {
+        series,
         basics,
         skills : skills,
         sign : sign.value,
