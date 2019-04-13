@@ -1,7 +1,7 @@
 [{
   "active" : true,
   "character" : "Chrono Guy",
-  "skills" : ["Time Freeze", "Quantum Teleportation", "Warp Out Foe", "Entropy Ray", "Slow Speed Field"],
+  "skills" : ["Time Freeze", "Quantum Teleportation", "Cognitive Flash Forward", "Entropy Ray", "Slow Speed Field"],
   "ultimate" : "Timeline Shift",
   "alignment" : "Chaotic Neutral",
   "image" : "chrono_guy.png",

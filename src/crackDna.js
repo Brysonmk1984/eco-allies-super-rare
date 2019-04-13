@@ -6,6 +6,7 @@ function determineSeries(dna){
 }
 // 3,4,5 Digits
 function determineAlly(dna){
+    console.log('ALLY - ', dna.substring(3,6));
     const substr = parseInt(dna.substring(3,6));
     switch(true){
         // JavaScript removes leading zeroes, in this case, the number will fall between 0 and 99.  eg: '007' ends up being 7 as a number
@@ -34,6 +35,7 @@ function determineAlly(dna){
 
 // 6, 7, 8 Digits
 function determineSkills(dna, character){
+    console.log('SKILLS', dna.substring(6,9));
     const skill = parseInt(dna.substring(6,9));
     
     const a = allyList.find((a)=>{
@@ -154,6 +156,7 @@ function determineSkills(dna, character){
 
 // 9,10 Digits
 function determineSign(dna){
+    console.log('SIGN', dna.substring(9,11));
     const substr = parseInt(dna.substring(9,11));
 
     switch(true){
@@ -201,8 +204,9 @@ function determineSign(dna){
 
 // 11th Digit
 function determineAlignment(dna){
+    console.log('Alignment', dna.substring(11,12));
     const substr = parseInt(dna.substring(11,12));
-    //console.log('Alignment',dna, substr);
+    
     switch(true){
         
         // Lawful Good
@@ -237,8 +241,9 @@ function determineAlignment(dna){
 
 // 12, 13 Digits
 function determineColor(dna){
+    console.log('COLOR',dna, dna.substring(12,14));
     const substr = parseInt(dna.substring(12,14));
-    console.log('COLOR',dna, substr);
+
 
     switch(true){
         
@@ -275,6 +280,23 @@ function determineColor(dna){
             return { value : null, modifier : 2 }
     }
 
+}
+
+// 14, 15, 16 Digits
+function determineBadges(dna){
+    console.log('badgenum',dna.substring(14,17));
+    const substr = parseInt(dna.substring(14,17));
+    
+    switch(true){
+        // Lawful Good
+        case (0 === substr):
+            return {value : null, bonus : 0};
+        case (1 === substr):
+            return {value : 'Tectonic Ten', bonus : 10};
+        default:
+            return {value : null, bonus : 0};
+
+    }
 }
 
 function determineStoneSignMatch(stone, sign){
@@ -356,9 +378,9 @@ function determineStoneSignMatch(stone, sign){
     }
 }
 
-function determinePower(skillCount, sign, alignment, color, hasUltimate, matchingStone){
+function determinePower(skillCount, sign, alignment, color, hasUltimate, matchingStone, badgeBonus){
     let powerDecimal = (skillCount * .4) + (sign * .1) + (alignment * .2) + (color * .3);
-    let power = Math.floor(powerDecimal * 100) + (hasUltimate ? 100 : 0) + (matchingStone ? 150 : 0);
+    let power = Math.floor(powerDecimal * 100) + (hasUltimate ? 100 : 0) + (matchingStone ? 150 : 0) + badgeBonus;
     return power;
     
 }
@@ -370,6 +392,7 @@ function decodeAlly(dna){
     const skills = determineSkills(dna, basics.character);
     const sign = determineSign(dna);
     const alignment = determineAlignment(dna);
+    const badge = determineBadges(dna);
     const matchingStone = determineStoneSignMatch(color.value, sign.value);
     const hasUltimate = basics.alignment === alignment.value;
     const ally = {
@@ -378,9 +401,10 @@ function decodeAlly(dna){
         skills : skills,
         sign : sign.value,
         alignment : alignment.value,
+        badge : badge.value,
         color : color.value,
         ultimate : hasUltimate ? basics.ultimate : null,
-        power : determinePower(skills.length, sign.modifier, alignment.modifier, color.modifier, hasUltimate, matchingStone)
+        power : determinePower(skills.length, sign.modifier, alignment.modifier, color.modifier, hasUltimate, matchingStone, badge.bonus)
     };
 
     return ally;

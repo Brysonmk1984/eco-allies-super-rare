@@ -12,6 +12,9 @@
       h2{
         margin-bottom: 30px;
       }
+      #codeInput{
+        width: 250px;
+      }
       .token-details{
         display:block;
         margin:15px 0px;
@@ -32,7 +35,10 @@
     <br />
     <hr />
     <br />
-    <div><button id="add">add</button></div>
+    <div>
+      <input id="codeInput" type="text" min="25" max="25" />
+      <button id="add">add</button>
+    </div>
     <section id="listSection">
       <h2>Token Creation History</h2>
       <ul id="tokenList" class="token-list list-group list-group-striped">
