@@ -12,8 +12,17 @@
       h2{
         margin-bottom: 30px;
       }
-      #codeInput{
+      
+      #codeInput, #decodeInput{
         width: 250px;
+      }
+      .input-container{
+        margin:20px;
+      }
+      .decoded-ally-container{
+        margin:20px;
+        background: #ececec;
+        border-radius: 8px;
       }
       .token-details{
         display:block;
@@ -35,8 +44,31 @@
     <br />
     <hr />
     <br />
-    <div>
-      <input id="codeInput" type="text" min="25" max="25" />
+    <div class="input-container">
+      <label>
+        <strong>Decode Ally</strong>
+        <input id="decodeInput" type="text" min="25" max="25" />
+      </label>
+      <button id="decode">Decode</button>
+    </div>
+    <div class="decoded-ally-container">
+      <strong id="dAlly"></strong> - 
+      <strong id="dColor"></strong> - 
+      <strong id="dSeries"></strong> - 
+      <strong id="dBadge"></strong> - 
+      <strong id="dSign"></strong> - 
+      <strong id="dAlignment"></strong> - 
+      <strong id="dPower"></strong> - 
+      <strong id="dMatchingStone"></strong> -
+      <strong id="dUltimate"></strong> - 
+      <span id="dSkills"></span>
+    </div>
+    <hr />
+    <div class="input-container">
+      <label>
+          <strong>Add Ally</strong>
+          <input id="codeInput" type="text" min="25" max="25" />
+      </label>
       <button id="add">add</button>
     </div>
     <section id="listSection">

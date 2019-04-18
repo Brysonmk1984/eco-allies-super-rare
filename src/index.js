@@ -10,11 +10,7 @@ const App = {
   contract: null,
 
   getTokensFromBlockchain : function(dnaList){
-
-    const dummyList = ['6483902865410298'];
     let arrayOfAllies = [];
-    
-    //arrayOfAllies.push(this.generateLi(dnaList[0]));
 
     dnaList.forEach((a, i) =>{
       arrayOfAllies.push(this.generateLi(dnaList[i]));
@@ -116,7 +112,7 @@ const App = {
       console.log('Ally to be added -', a.basics, a.series, a.skills, a.sign, a.alignment, a.badge, a.power, 'color -', a.color, 'ultimate -', a.ultimate );
   
       const confResult = confirm(`Are you sure you want to add ${newAllyStr} to the blockchain?`);
-      if(confResult){
+      if(confResult){console.log('acc', this.account);
         this.contract.methods.addToAllyArray(this.web3.utils.fromAscii(newAllyStr)).send({from: this.account, gasPrice : '4700000'})
         .then((data)=>{
           console.log('array length', data);
@@ -131,6 +127,23 @@ const App = {
   addEventHandlers : function(){
     document.getElementById('add').addEventListener('click',() =>{
       this.addAllyToBlockchain("6483902865410298");
+    });
+    document.getElementById('decode').addEventListener('click',() =>{
+      const inputVal = document.getElementById("decodeInput").value;
+      console.log('IV', inputVal);
+      const ally = decodeAlly(inputVal);
+
+      console.log('!', ally);
+      document.getElementById('dAlly').textContent = ally.basics.character;
+      document.getElementById('dColor').textContent = ally.Color ? ally.color : 'NO COLOR';
+      document.getElementById('dSeries').textContent = ally.series;
+      document.getElementById('dBadge').textContent = ally.badge;
+      document.getElementById('dSign').textContent = ally.sign;
+      document.getElementById('dAlignment').textContent = ally.alignment;
+      document.getElementById('dPower').textContent = ally.power;
+      document.getElementById('dMatchingStone').textContent = `matching stone - ${ally.matchingStone}`;
+      document.getElementById('dUltimate').textContent = ally.ultimate ? ally.ultimate : 'NO ULTIMATE';
+      document.getElementById('dSkills').textContent = ally.skills;
     });
   },
   start: async function() {

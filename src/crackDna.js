@@ -214,25 +214,25 @@ function determineAlignment(dna){
             return {value : 'Lawful Good', modifier : 10};
         // Neutral Good
         case (1 === substr):
-            return {value : 'Neutral Good', modifier : 5};
+            return {value : 'Neutral Good', modifier : 8};
         // Chaotic Good
         case (2 === substr):
-            return {value : 'Chaotic Good', modifier : 10};
+            return {value : 'Chaotic Good', modifier : 9};
         // Lawful Neutral
         case (3 === substr):
-            return {value : 'Lawful Neutral', modifier : 5};
+            return {value : 'Lawful Neutral', modifier : 9};
         // True Neutral
         case (4 === substr || 5 === substr):
-            return {value : 'True Neutral', modifier : 1};
+            return {value : 'True Neutral', modifier : 10};
         // Chaotic Neutral
         case (6 === substr):
-            return {value : 'Chaotic Neutral', modifier : 5};
+            return {value : 'Chaotic Neutral', modifier : 8};
         // Lawful Evil
         case (7 === substr):
-            return {value : 'Lawful Evil', modifier : 10};
+            return {value : 'Lawful Evil', modifier : 8};
         // Neutral Evil
         case (8 === substr):
-            return {value : 'Neutral Evil', modifier : 5};
+            return {value : 'Neutral Evil', modifier : 9};
         // Chaotic Evil
         case (9 === substr):
             return {value : 'Chaotic Evil', modifier : 10};
@@ -300,6 +300,7 @@ function determineBadges(dna){
 }
 
 function determineStoneSignMatch(stone, sign){
+    console.log(stone, sign);
     switch(sign){
         case ("Aries"):
             if(stone === 'Diamond'){
@@ -320,7 +321,7 @@ function determineStoneSignMatch(stone, sign){
             }
             return false;
         case ("Cancer"):
-            if("Emerald"){
+            if(stone === "Emerald"){
                 return true;
                 break;
             }
@@ -394,6 +395,7 @@ function decodeAlly(dna){
     const alignment = determineAlignment(dna);
     const badge = determineBadges(dna);
     const matchingStone = determineStoneSignMatch(color.value, sign.value);
+
     const hasUltimate = basics.alignment === alignment.value;
     const ally = {
         series,
@@ -401,10 +403,11 @@ function decodeAlly(dna){
         skills : skills,
         sign : sign.value,
         alignment : alignment.value,
-        badge : badge.value,
+        badge : `${badge.value} Bonus: ${badge.bonus}`,
         color : color.value,
         ultimate : hasUltimate ? basics.ultimate : null,
-        power : determinePower(skills.length, sign.modifier, alignment.modifier, color.modifier, hasUltimate, matchingStone, badge.bonus)
+        power : determinePower(skills.length, sign.modifier, alignment.modifier, color.modifier, hasUltimate, matchingStone, badge.bonus),
+        matchingStone,
     };
 
     return ally;
