@@ -76,8 +76,8 @@ const App = {
     const tt = {
       chronoGuy : '00100099966699001000000',
       compostCreature : '00110099971499001000000',
-      theEmpath : '00120099927299001000000',
-      filterBot : '00130099979199001000000',
+      filterBot : '00120099979199001000000',
+      theEmpath : '00130099927299001000000',
       boulderBro : '00140099900499001000000',
       naturalNinja : '00150099986699001000000',
       reuseBot : '00160099909099001000000',
@@ -105,7 +105,6 @@ const App = {
       let combinedStr = seriesStr + strNum + uniqueBadge + cosmetic + reserveDigits;
       newAllyStr = combinedStr;
     }
-    console.log(newAllyStr, newAllyStr.length);
 
     if(newAllyStr.length === 23){
       const a = decodeAlly(newAllyStr);
@@ -130,10 +129,7 @@ const App = {
     });
     document.getElementById('decode').addEventListener('click',() =>{
       const inputVal = document.getElementById("decodeInput").value;
-      console.log('IV', inputVal);
       const ally = decodeAlly(inputVal);
-
-      console.log('!', ally);
       document.getElementById('dAlly').textContent = ally.basics.character;
       document.getElementById('dColor').textContent = ally.Color ? ally.color : 'NO COLOR';
       document.getElementById('dSeries').textContent = ally.series;
@@ -161,15 +157,15 @@ const App = {
       // get accounts
       const accounts = await web3.eth.getAccounts();
       this.account = accounts[0];
-      console.log('ACC',  this.account);
+      //console.log('ACC',  this.account);
 
       this.contract.methods.getAllAllies().call({from : this.account})
       .then((allies) =>{
-        console.log('allies as byte32 hex', allies);
+        //console.log('allies as byte32 hex', allies);
         const stringArray = allies.map((ally) =>{
           return web3.utils.toUtf8(ally);
         });
-        console.log('allies as string', stringArray);
+        //console.log('allies as string', stringArray);
         this.getTokensFromBlockchain(stringArray);
       });
          

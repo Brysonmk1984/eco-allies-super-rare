@@ -6,7 +6,7 @@ function determineSeries(dna){
 }
 // 3,4,5 Digits
 function determineAlly(dna){
-    console.log('ALLY - ', dna.substring(3,6));
+    //console.log('ALLY - ', dna.substring(3,6));
     const substr = parseInt(dna.substring(3,6));
     switch(true){
         // JavaScript removes leading zeroes, in this case, the number will fall between 0 and 99.  eg: '007' ends up being 7 as a number
@@ -35,7 +35,7 @@ function determineAlly(dna){
 
 // 6, 7, 8 Digits
 function determineSkills(dna, character){
-    console.log('SKILLS', dna.substring(6,9));
+    //console.log('SKILLS', dna.substring(6,9));
     const skill = parseInt(dna.substring(6,9));
     
     const a = allyList.find((a)=>{
@@ -156,7 +156,7 @@ function determineSkills(dna, character){
 
 // 9,10 Digits
 function determineSign(dna){
-    console.log('SIGN', dna.substring(9,11));
+    //console.log('SIGN', dna.substring(9,11));
     const substr = parseInt(dna.substring(9,11));
 
     switch(true){
@@ -204,7 +204,7 @@ function determineSign(dna){
 
 // 11th Digit
 function determineAlignment(dna){
-    console.log('Alignment', dna.substring(11,12));
+    //console.log('Alignment', dna.substring(11,12));
     const substr = parseInt(dna.substring(11,12));
     
     switch(true){
@@ -241,7 +241,7 @@ function determineAlignment(dna){
 
 // 12, 13 Digits
 function determineColor(dna){
-    console.log('COLOR',dna, dna.substring(12,14));
+    //console.log('COLOR',dna, dna.substring(12,14));
     const substr = parseInt(dna.substring(12,14));
 
 
@@ -284,7 +284,7 @@ function determineColor(dna){
 
 // 14, 15, 16 Digits
 function determineBadges(dna){
-    console.log('badgenum',dna.substring(14,17));
+    //console.log('badgenum',dna.substring(14,17));
     const substr = parseInt(dna.substring(14,17));
     
     switch(true){
@@ -300,7 +300,7 @@ function determineBadges(dna){
 }
 
 function determineStoneSignMatch(stone, sign){
-    console.log(stone, sign);
+    //console.log(stone, sign);
     switch(sign){
         case ("Aries"):
             if(stone === 'Diamond'){
