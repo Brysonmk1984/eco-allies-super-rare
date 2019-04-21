@@ -23,6 +23,9 @@
 //
 require('dotenv').config();
 const mnemonic = process.env.MNEMONIC;
+const prod_mnemonic = process.env.PROD_MNEMONIC;
+const infuraApiKey = process.env.INFURAAPIKEY;
+const pa = process.env.PK;
 const HDWalletProvider = require('truffle-hdwallet-provider');
 
 module.exports = {
@@ -51,7 +54,7 @@ module.exports = {
 
     rinkeby: {
       provider: function(){
-        return new HDWalletProvider(mnemonic, 'https://rinkeby.infura.io/v3/6c7de342e43e4fb0822e25cfb49f1ea9');
+        return new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/${infuraApiKey}`);
       },
       //host : "localhost",
       //port : 8545,
@@ -60,7 +63,17 @@ module.exports = {
       gas: 4500000,
       //gasPrice: 25000000000
     },
-
+    mainnet: {
+      provider: function(){
+        return new HDWalletProvider(pa, `https://mainnet.infura.io/v3/${infuraApiKey}`);
+      },
+      from: "0x0a39c5e44774876EB8897948EF74a802460bC57A",
+      network_id: 1,
+      confirmations : 2,
+      gas: 5000000, 
+      gasPrice: 25000000000, 
+         
+    },
     // Another network with more advanced options...
     // advanced: {
       // port: 8777,             // Custom port

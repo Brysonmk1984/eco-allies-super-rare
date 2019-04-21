@@ -125,7 +125,7 @@ const App = {
   },
   addEventHandlers : function(){
     document.getElementById('add').addEventListener('click',() =>{
-      this.addAllyToBlockchain("6483902865410298");
+      this.addAllyToBlockchain();
     });
     document.getElementById('decode').addEventListener('click',() =>{
       const inputVal = document.getElementById("decodeInput").value;
