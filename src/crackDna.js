@@ -1,4 +1,5 @@
 import allyList from './allyList.json';
+
 // First 3 Digits - 0,1,2
 function determineSeries(dna){
     const substr = parseInt(dna.substring(0,3));
@@ -7,30 +8,72 @@ function determineSeries(dna){
 // 3,4,5 Digits
 function determineAlly(dna){
     //console.log('ALLY - ', dna.substring(3,6));
+    // Version of EA
+    const version = parseInt(dna.substring(18,19));
+    console.log('version', version);
+    //Ally
     const substr = parseInt(dna.substring(3,6));
-    switch(true){
-        // JavaScript removes leading zeroes, in this case, the number will fall between 0 and 99.  eg: '007' ends up being 7 as a number
-        case (0 <= substr && substr <= 99):
-            return allyList[0];
-        case (100 <= substr && substr <= 199):
-            return allyList[1];
-        case (200 <= substr && substr <= 299):
-            return allyList[2];
-        case (300 <= substr && substr <= 399):
-            return allyList[3];
-        case (400 <= substr && substr <= 499):
-            return allyList[4];
-        case (500 <= substr && substr <= 599):
-            return allyList[5];
-        case (600 <= substr && substr <= 699):
-            return allyList[6];
-        case (700 <= substr && substr <= 799):
-            return allyList[7];
-        case (800 <= substr && substr <= 899):
-            return allyList[8];
-        case(900 <= substr && substr <= 999):
-            return allyList[9];
+    if(version){
+        if(version === 1){
+            switch(true){
+                // JavaScript removes leading zeroes, in this case, the number will fall between 0 and 99.  eg: '007' ends up being 7 as a number
+                case (0 <= substr && substr <= 99):
+                    return allyList[0];
+                case (100 <= substr && substr <= 199):
+                    return allyList[1];
+                case (200 <= substr && substr <= 299):
+                    return allyList[2];
+                case (300 <= substr && substr <= 399):
+                    return allyList[3];
+                case (400 <= substr && substr <= 499):
+                    return allyList[4];
+                case (500 <= substr && substr <= 599):
+                    return allyList[5];
+                case (600 <= substr && substr <= 699):
+                    return allyList[6];
+                case (700 <= substr && substr <= 799):
+                    return allyList[7];
+                case (800 <= substr && substr <= 899):
+                    return allyList[8];
+                case(900 <= substr && substr <= 996):
+                    return allyList[9];
+                // Titans
+                case(997 === substr):
+                    return allyList[10];
+                case(998 === substr):
+                    return allyList[11];
+                case(999 === substr):
+                    return allyList[12];
+            }
+
+        }
+    }else{
+        switch(true){
+            // JavaScript removes leading zeroes, in this case, the number will fall between 0 and 99.  eg: '007' ends up being 7 as a number
+            case (0 <= substr && substr <= 99):
+                return allyList[0];
+            case (100 <= substr && substr <= 199):
+                return allyList[1];
+            case (200 <= substr && substr <= 299):
+                return allyList[2];
+            case (300 <= substr && substr <= 399):
+                return allyList[3];
+            case (400 <= substr && substr <= 499):
+                return allyList[4];
+            case (500 <= substr && substr <= 599):
+                return allyList[5];
+            case (600 <= substr && substr <= 699):
+                return allyList[6];
+            case (700 <= substr && substr <= 799):
+                return allyList[7];
+            case (800 <= substr && substr <= 899):
+                return allyList[8];
+            case(900 <= substr && substr <= 999):
+                return allyList[9];
+        }
+
     }
+
 }
 
 // 6, 7, 8 Digits
@@ -41,7 +84,7 @@ function determineSkills(dna, character){
     const a = allyList.find((a)=>{
         return a.character === character;
     }).skills;
-
+    console.log('A', a);
     const crackedSkills = [];
     switch(true){
         // JavaScript removes leading zeroes, in this case, the number will fall between 0 and 31.  eg: '077' ends up being 77 as a number
@@ -148,6 +191,8 @@ function determineSkills(dna, character){
             crackedSkills.push(a[0], a[1], a[2], a[3], a[4]);
             break;
         default:
+            console.log('DEF', crackedSkills);
+            crackedSkills;
     }
     
     return crackedSkills;
@@ -243,7 +288,7 @@ function determineAlignment(dna){
 function determineColor(dna){
     //console.log('COLOR',dna, dna.substring(12,14));
     const substr = parseInt(dna.substring(12,14));
-
+    console.log('!!!',substr);
 
     switch(true){
         
@@ -288,11 +333,13 @@ function determineBadges(dna){
     const substr = parseInt(dna.substring(14,17));
     
     switch(true){
-        // Lawful Good
+        
         case (0 === substr):
             return {value : null, bonus : 0};
         case (1 === substr):
             return {value : 'Tectonic Ten', bonus : 10};
+        case (2 === substr):
+            return {value : 'Titans of Babylon', bonus : 1000};
         default:
             return {value : null, bonus : 0};
 
@@ -386,15 +433,18 @@ function determinePower(skillCount, sign, alignment, color, hasUltimate, matchin
     
 }
 
-function decodeAlly(dna){
+function decodeAlly(dna, version){
     const series = determineSeries(dna);
-    const basics =  determineAlly(dna);
+    const basics =  determineAlly(dna, version);
     const color = determineColor(dna);
     const skills = determineSkills(dna, basics.character);
     const sign = determineSign(dna);
     const alignment = determineAlignment(dna);
     const badge = determineBadges(dna);
     const matchingStone = determineStoneSignMatch(color.value, sign.value);
+    
+
+
 
     const hasUltimate = basics.alignment === alignment.value;
     const ally = {

@@ -25,8 +25,8 @@ const App = {
 
   },
   generateLi : function(dna){
-    
-    const ally = decodeAlly(dna);
+    // Version 0 is the first version with just the tectonic ten, version 1 includes TT and Titans
+    const ally = decodeAlly(dna, 1);
     //console.log('ALLY DNA', dna, ally);
     let skillItems = '';
     
@@ -157,7 +157,7 @@ const App = {
       // get accounts
       const accounts = await web3.eth.getAccounts();
       this.account = accounts[0];
-      //console.log('ACC',  this.account);
+
 
       this.contract.methods.getAllAllies().call({from : this.account})
       .then((allies) =>{
